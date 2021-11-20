@@ -34,6 +34,13 @@ namespace BaiTapLonLTTQ
                 Login login = new Login();
                 login.Show();
             }
+            for(int i = 0; i < user.Class1.Count; i++)
+            {
+                char a = user.Class1[i][0];
+                char b = user.Class1[i][1];
+                if(!cbKhoi.Items.Contains(a)) cbKhoi.Items.Add(a);
+                if(!cbLop.Items.Contains(b)) cbLop.Items.Add(b);
+            }
             
 
 
@@ -51,9 +58,7 @@ namespace BaiTapLonLTTQ
             dgvHS.Columns[8].HeaderText = "Số điện thoại bố";
             dgvHS.Columns[9].HeaderText = "Họ tên mẹ";
             dgvHS.Columns[10].HeaderText = "Nghề nghiệp mẹ";
-            dgvHS.Columns[11].HeaderText = "Số điện thoại mẹ";
-            if (data.Rows.Count > 0) btnUpdate.Enabled = true;
-            else btnUpdate.Enabled = false;
+            dgvHS.Columns[11].HeaderText = "Số điện thoại mẹ";            
 
 
         }
@@ -67,6 +72,21 @@ namespace BaiTapLonLTTQ
         private void cbLop_SelectedIndexChanged(object sender, EventArgs e)
         {
             QuanLyHoSo_Load(sender, e);
+        }
+
+        private void dgvHS_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvHS.CurrentRow.Cells[0].Value.ToString() != "")
+            {
+                btnUpdate.Enabled = true;
+                btnDel.Enabled = true;
+            }
+            else
+            {
+                btnUpdate.Enabled = false;
+                btnDel.Enabled = false;
+            }
+                     
         }
     }
 }

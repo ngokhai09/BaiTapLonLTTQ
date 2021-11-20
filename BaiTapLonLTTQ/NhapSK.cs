@@ -28,7 +28,7 @@ namespace BaiTapLonLTTQ
                 Login login = new Login();
                 login.Show();
             }
-            string sql = "select * from HS";
+            string sql = "select * from SK where";
             DataTable data = database.DataReader(sql);
 
             dgvHealth.DataSource = data;

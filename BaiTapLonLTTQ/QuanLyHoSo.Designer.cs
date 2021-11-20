@@ -194,6 +194,7 @@ namespace BaiTapLonLTTQ
             this.dgvHS.RowHeadersWidth = 51;
             this.dgvHS.Size = new System.Drawing.Size(1459, 628);
             this.dgvHS.TabIndex = 33;
+            this.dgvHS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHS_CellClick);
             // 
             // comboBox4
             // 
@@ -219,11 +220,6 @@ namespace BaiTapLonLTTQ
             // 
             this.cbLop.Enabled = false;
             this.cbLop.FormattingEnabled = true;
-            this.cbLop.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D"});
             this.cbLop.Location = new System.Drawing.Point(277, 22);
             this.cbLop.Margin = new System.Windows.Forms.Padding(4);
             this.cbLop.Name = "cbLop";

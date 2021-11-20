@@ -21,10 +21,11 @@ namespace BaiTapLonLTTQ
         {
             InitializeComponent();
             this.user = user;
-            string sql = "Select TenCV from tblinfo where Tentaikhoan = N'" + user.Username + "'";
+            string sql = "Select TenCV, TenLop, TenMon from tblinfo where Tentaikhoan = N'" + user.Username + "'";
             dataTable = databaseProcess.DataReader(sql);
-            string tcv = dataTable.Rows[0]["TenCV"].ToString().Trim();
-            if (tcv == "Bộ Môn")
+            int n = dataTable.Rows.Count;
+            user.Chucvu = dataTable.Rows[0]["TenCV"].ToString().Trim();
+            if (user.Chucvu == "Bộ Môn")
             {
                 Profile.Enabled = false;
                 Healthy.Enabled = false;
@@ -32,11 +33,16 @@ namespace BaiTapLonLTTQ
                 Healthy.Enabled = false;
                 menuStrip2.Enabled = false;
             }
-            else if(tcv == "Chủ Nhiệm")
+            else if(user.Chucvu == "Chủ Nhiệm")
             {
                 mntDSGiaoVien.Enabled = false;
                 mntGiaoVien.Enabled = false;
             }
+            for(int i = 0; i < n; i++)
+            {
+                user.Class1.Add(dataTable.Rows[i]["TenLop"].ToString().Trim());
+            }
+            user.Subject = dataTable.Rows[0]["TenMon"].ToString().Trim();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
