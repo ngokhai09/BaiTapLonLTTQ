@@ -14,6 +14,7 @@ namespace BaiTapLonLTTQ
     {
         User user;
         DatabaseProcess database = new DatabaseProcess();
+        List<string> delString = new List<string>();
         public HoSoGiaoVien(User user)
         {
             InitializeComponent();
@@ -57,6 +58,55 @@ namespace BaiTapLonLTTQ
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             HoSoGiaoVien_Load(sender, e);
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            delString.Add(dgvList.CurrentRow.Cells[0].Value.ToString());
+            dgvList.CurrentRow.DefaultCellStyle.BackColor = Color.Red;            
+        }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvList.CurrentRow.Cells[0].Value.ToString() != "")
+            {
+                btnUnTick.Enabled = true;
+            }
+            else
+            {
+                btnUnTick.Enabled = false;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bool Del = true, Update = true;
+            foreach(string item  in delString)
+            {
+                string sql = "Delete from GiaoVien where MaGV = N'" + item + "'";
+                if (database.DataChange(sql))
+                {
+                    delString.Remove(item);
+                }
+            }
+            string str = "";
+            foreach(string item in delString)
+            {
+                str += item + "\n";
+            }
+            if(str != "")
+            {
+                MessageBox.Show("Xóa không thành công các giáo viên có mã:\n" + str, "Thông Báo", MessageBoxButtons.OK);
+                Del = false;
+            }
+            
+
+        }
+
+        private void btnUnTick_Click(object sender, EventArgs e)
+        {
+            delString.Remove(dgvList.CurrentRow.Cells[0].Value.ToString());
+            dgvList.CurrentRow.DefaultCellStyle.BackColor = Color.White;
         }
     }
 }

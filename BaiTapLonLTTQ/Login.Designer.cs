@@ -109,6 +109,7 @@ namespace BaiTapLonLTTQ
             this.MaximizeBox = false;
             this.Name = "Login";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ErrAcc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrPass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEye)).EndInit();

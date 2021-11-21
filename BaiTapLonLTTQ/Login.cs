@@ -98,5 +98,10 @@ namespace BaiTapLonLTTQ
         {
             if (txtPassword.Text != "") ErrPass.Clear();
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

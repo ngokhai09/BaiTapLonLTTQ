@@ -34,18 +34,45 @@ namespace BaiTapLonLTTQ
                 Login login = new Login();
                 login.Show();
             }
-            for(int i = 0; i < user.Class1.Count; i++)
+            string sql;
+            DataTable data;
+            if (user.Chucvu == "Chủ Nhiệm")
             {
-                char a = user.Class1[i][0];
-                char b = user.Class1[i][1];
-                if(!cbKhoi.Items.Contains(a)) cbKhoi.Items.Add(a);
-                if(!cbLop.Items.Contains(b)) cbLop.Items.Add(b);
+                for (int i = 0; i < user.Class1.Count; i++)
+                {
+                    char a = user.Class1[i][0];
+                    char b = user.Class1[i][1];
+                    if (!cbKhoi.Items.Contains(a)) cbKhoi.Items.Add(a);
+                    if (!cbLop.Items.Contains(b)) cbLop.Items.Add(b);
+                }
             }
+            else
+            {
+                sql = "Select TenLop from Lop";
+                data = database.DataReader(sql);
+                int n = data.Rows.Count;
+                for(int i = 0; i < n; i++)
+                {
+                    char a = data.Rows[i]["TenLop"].ToString()[0];
+                    char b = data.Rows[i]["TenLop"].ToString()[1];
+                    if (!cbKhoi.Items.Contains(a)) cbKhoi.Items.Add(a);
+                    if (!cbLop.Items.Contains(b)) cbLop.Items.Add(b);
+                }
+            }
+            
             
 
 
-            string sql = "select * from HS where TenLop " + check(cbKhoi.Text, cbLop.Text);
-            DataTable data = database.DataReader(sql);
+            sql = "select * from HS where TenLop " + check(cbKhoi.Text, cbLop.Text);
+            data = database.DataReader(sql);
+            if(data.Rows.Count > 0)
+            {
+                btnUpdate.Enabled = true;
+            }
+            else
+            {
+                btnUpdate.Enabled = false;
+            }
             dgvHS.DataSource = data;
             dgvHS.Columns[0].HeaderText = "Mã Học Sinh";
             dgvHS.Columns[1].HeaderText = "Tên Học Sinh";
@@ -78,12 +105,10 @@ namespace BaiTapLonLTTQ
         {
             if (dgvHS.CurrentRow.Cells[0].Value.ToString() != "")
             {
-                btnUpdate.Enabled = true;
                 btnDel.Enabled = true;
             }
             else
             {
-                btnUpdate.Enabled = false;
                 btnDel.Enabled = false;
             }
                      

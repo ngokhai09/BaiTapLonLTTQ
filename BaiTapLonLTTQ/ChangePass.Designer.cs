@@ -131,7 +131,7 @@ namespace BaiTapLonLTTQ
             this.errRe.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errRe.ContainerControl = this;
             // 
-            // Register
+            // ChangePass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +144,7 @@ namespace BaiTapLonLTTQ
             this.Controls.Add(this.txtOldpass);
             this.Controls.Add(this.txtPass);
             this.DoubleBuffered = true;
-            this.Name = "Register";
+            this.Name = "ChangePass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đổi mật khẩu";
             ((System.ComponentModel.ISupportInitialize)(this.errOld)).EndInit();

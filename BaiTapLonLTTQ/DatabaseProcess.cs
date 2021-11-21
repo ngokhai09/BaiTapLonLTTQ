@@ -37,14 +37,25 @@ namespace BaiTapLonLTTQ
             closeConnect();
             return tblData;
         }
-        public void DataChange(string sqlcmd)
+        public bool DataChange(string sqlcmd)
         {
-            SqlCommand command = new SqlCommand();
-            openConnect();
-            command.Connection = sqlConnect;
-            command.CommandText = sqlcmd;
-            command.ExecuteNonQuery();
-            closeConnect();
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                openConnect();
+                command.Connection = sqlConnect;
+                command.CommandText = sqlcmd;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                closeConnect();
+            }
+            return true;
         }
     }
 }

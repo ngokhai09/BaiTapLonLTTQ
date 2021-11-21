@@ -58,12 +58,21 @@ namespace BaiTapLonLTTQ
             }
             else
             {
-
+if (!cbMon.Items.Contains(user.Subject)) cbMon.Items.Add(user.Subject);
             }
-            if (!cbMon.Items.Contains(user.Subject)) cbMon.Items.Add(user.Subject);
+
+            
 
             sql = "select MaHS, TenHS, TenLop, TenMon, MucDoDanhGia, NoiDungDanhGia from DG where TenLop " + check(cbKhoi.Text, cbLop.Text, cbMon.Text);
             data = database.DataReader(sql);
+            if(data.Rows.Count > 0)
+            {
+                btnUpdate.Enabled = true;
+            }
+            else
+            {
+                btnUpdate.Enabled = false;
+            }
             dgvDK.DataSource = data;
             dgvDK.Columns[0].HeaderText = "Mã Học Sinh";
             dgvDK.Columns[1].HeaderText = "Tên Học Sinh";

@@ -126,14 +126,17 @@
     <value>Microsoft Sans Serif, 13.8pt</value>
   </data>
   <data name="txtAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 104</value>
+    <value>302, 84</value>
+  </data>
+  <data name="txtAccount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtAccount.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="txtAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 36</value>
+    <value>183, 30</value>
   </data>
   <data name="txtAccount.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -154,7 +157,10 @@
     <value>Microsoft Sans Serif, 13.8pt</value>
   </data>
   <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 200</value>
+    <value>302, 162</value>
+  </data>
+  <data name="txtPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="txtPassword.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -163,7 +169,7 @@
     <value>*</value>
   </data>
   <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 39</value>
+    <value>183, 32</value>
   </data>
   <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -190,10 +196,13 @@
     <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
   </data>
   <data name="btnLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>362, 268</value>
+    <value>272, 218</value>
+  </data>
+  <data name="btnLogin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btnLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 44</value>
+    <value>90, 36</value>
   </data>
   <data name="btnLogin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -220,10 +229,13 @@
     <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
   </data>
   <data name="btnExit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 268</value>
+    <value>420, 218</value>
+  </data>
+  <data name="btnExit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 44</value>
+    <value>94, 36</value>
   </data>
   <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -253,7 +265,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6563,16 +6575,19 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>765, 474</value>
+    <value>574, 385</value>
   </data>
   <data name="pbEye.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="pbEye.Location" type="System.Drawing.Point, System.Drawing">
-    <value>608, 205</value>
+    <value>456, 167</value>
+  </data>
+  <data name="pbEye.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="pbEye.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 30</value>
+    <value>28, 24</value>
   </data>
   <data name="pbEye.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -6778,6 +6793,9 @@
         Ahm5K+3bvcjoLv1PoOiMs8ivGWAwOf09jZiVJxJ3wuTDT/Ed+kp9/g/TiKppJq5pfAAAAABJRU5ErkJg
         gg==
 </value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
