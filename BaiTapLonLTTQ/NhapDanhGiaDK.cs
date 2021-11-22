@@ -48,7 +48,7 @@ namespace BaiTapLonLTTQ
                 sql = "select TenMon from MonHoc";
                 data = database.DataReader(sql);
                 int n = data.Rows.Count;
-                for(int i = 0; i < n; i++)
+                for (int i = 0; i < n; i++)
                 {
                     if (!cbMon.Items.Contains(data.Rows[i]["TenMon"].ToString()))
                     {
@@ -58,7 +58,7 @@ namespace BaiTapLonLTTQ
             }
             else
             {
-if (!cbMon.Items.Contains(user.Subject)) cbMon.Items.Add(user.Subject);
+                if (!cbMon.Items.Contains(user.Subject)) cbMon.Items.Add(user.Subject);
             }
 
             

@@ -109,6 +109,7 @@ namespace BaiTapLonLTTQ
             this.btnExcel.TabIndex = 3;
             this.btnExcel.Text = "Nhập bằng excel";
             this.btnExcel.UseVisualStyleBackColor = false;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnUpdate
             // 

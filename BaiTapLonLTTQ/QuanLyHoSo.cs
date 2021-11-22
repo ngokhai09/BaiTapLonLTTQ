@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -112,6 +113,33 @@ namespace BaiTapLonLTTQ
                 btnDel.Enabled = false;
             }
                      
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Select file";
+            fdlg.InitialDirectory = @"D:\Year_3\Lập trinh trực quan\Doc\Dữ liệu";
+            fdlg.FileName = "";
+            fdlg.Filter = "Excel Sheet(*.xlsx)|*.xlsx|All Files(*.*)|*.*";
+            fdlg.FilterIndex = 1;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                String name = "Items";
+                String constr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+                                fdlg.FileName.ToString() +
+                                ";Extended Properties='Excel 8.0;HDR=YES;';";
+
+                OleDbConnection con = new OleDbConnection(constr);
+                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                con.Open();
+
+                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                dgvHS.DataSource = data;
+            }
         }
     }
 }
