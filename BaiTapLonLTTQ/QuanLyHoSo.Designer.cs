@@ -82,6 +82,7 @@ namespace BaiTapLonLTTQ
             this.btnXuat.TabIndex = 5;
             this.btnXuat.Text = "Xuất file";
             this.btnXuat.UseVisualStyleBackColor = false;
+            this.btnXuat.Click += new System.EventHandler(this.btnXuat_Click);
             // 
             // btnDel
             // 

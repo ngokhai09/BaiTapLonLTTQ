@@ -15,6 +15,7 @@ namespace BaiTapLonLTTQ
     {
         User user;
         DatabaseProcess database = new DatabaseProcess();
+        ExcelProcess excel = new ExcelProcess();
         public QuanLyHoSo(User user)
         {
             InitializeComponent();
@@ -75,9 +76,9 @@ namespace BaiTapLonLTTQ
                 btnUpdate.Enabled = false;
             }
             dgvHS.DataSource = data;
-            dgvHS.Columns[0].HeaderText = "Mã Học Sinh";
-            dgvHS.Columns[1].HeaderText = "Tên Học Sinh";
-            dgvHS.Columns[2].HeaderText = "Tên Lớp";
+            dgvHS.Columns[0].HeaderText = "STT";
+            dgvHS.Columns[1].HeaderText = "Mã Học Sinh";
+            dgvHS.Columns[2].HeaderText = "Tên Học Sinh";
             dgvHS.Columns[3].HeaderText = "Ngày Sinh";
             dgvHS.Columns[4].HeaderText = "Giới tính";
             dgvHS.Columns[5].HeaderText = "Địa chỉ";
@@ -117,29 +118,13 @@ namespace BaiTapLonLTTQ
 
         private void btnExcel_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = "Select file";
-            fdlg.InitialDirectory = @"D:\Year_3\Lập trinh trực quan\Doc\Dữ liệu";
-            fdlg.FileName = "";
-            fdlg.Filter = "Excel Sheet(*.xlsx)|*.xlsx|All Files(*.*)|*.*";
-            fdlg.FilterIndex = 1;
-            fdlg.RestoreDirectory = true;
-            if (fdlg.ShowDialog() == DialogResult.OK)
-            {
-                String name = "Items";
-                String constr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-                                fdlg.FileName.ToString() +
-                                ";Extended Properties='Excel 8.0;HDR=YES;';";
+            dgvHS.DataSource =  excel.readExcel("Select STT, MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe from [Sheet1$]");
+            //excel.writeExcel(dgvHS);
+        }
 
-                OleDbConnection con = new OleDbConnection(constr);
-                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
-                con.Open();
-
-                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
-                DataTable data = new DataTable();
-                sda.Fill(data);
-                dgvHS.DataSource = data;
-            }
+        private void btnXuat_Click(object sender, EventArgs e)
+        {
+            excel.writeExcel(dgvHS);
         }
     }
 }
