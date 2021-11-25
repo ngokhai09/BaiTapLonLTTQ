@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,6 +118,7 @@ namespace BaiTapLonLTTQ
             dgvHS.DataSource = excel.readExcel("Select MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe from [Sheet1$]");
             //excel.writeExcel(dgvHS);
             btnXuat.Enabled = true;
+            btnUpdate.Enabled = true;
             
         }
 
@@ -145,15 +147,64 @@ namespace BaiTapLonLTTQ
             delString.Remove(dgvHS.CurrentRow.Cells[0].Value.ToString());
             dgvHS.CurrentRow.DefaultCellStyle.BackColor = Color.White;
         }
+        private string Chuyen(string s)
+        {
+            string res = "", dd = "";
+            for(int i = s.Length - 1; i >= 0; i--)
+            {
+                if(s[i] != '/')
+                {
+                    dd += s[i];
+                }
+                else
+                {
+                    for(int j = dd.Length - 1; j >= 0; j--)
+                    {
+                        res += dd[j];
+                    }
+                    dd = "";
+                    res += '-';
+                }                
+            }
+            for (int j = dd.Length - 1; j >= 0; j--)
+            {
+                res += dd[j];
+            }
+            return res;
+        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string sql = "Delete from HocSinh where where MAHS = any (Select MaHS from HS where TenLop = N'"+ cbKhoi.Text + cbLop.Text +"')";
+            string sql = "select MaLop from Lop where TenLop = N'" + cbKhoi.Text + cbLop.Text + "'";
+            string ml = database.DataReader(sql).Rows[0]["MaLop"].ToString();
+            sql = "Delete from HocSinh where MaLop = N'"+ ml + "'";
             if (!database.DataChange(sql))
             {
                 MessageBox.Show("Cập nhật không thành công!");
                 return;
             }
+
+            for (int j = 0; j < dgvHS.Rows.Count - 1; j++)
+            {
+
+
+                sql = "Insert into HocSinh (MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe, MaLop ) values(";
+                for (int i = 0; i < dgvHS.Columns.Count; i++)
+                {
+                    if (dgvHS.Columns[i].HeaderText == "Ngày Sinh")
+                    {
+                        sql += "'" + Chuyen(dgvHS.Rows[j].Cells[i].Value.ToString()) + "', ";
+                    }
+                    else sql += "N'" + dgvHS.Rows[j].Cells[i].Value.ToString() + "', ";
+                }
+                sql += " N'" + ml + "')";
+                if (!database.DataChange(sql))
+                {
+                    MessageBox.Show("Cập nhật không thành công");
+                    return;
+                }
+            }
+            MessageBox.Show("Cập nhật thành công!");
         }
     }
 }

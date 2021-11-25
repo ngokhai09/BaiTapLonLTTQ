@@ -47,8 +47,9 @@ namespace BaiTapLonLTTQ
                 command.CommandText = sqlcmd;
                 command.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                
                 return false;
             }
             finally
