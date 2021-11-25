@@ -148,7 +148,7 @@ namespace BaiTapLonLTTQ
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string sql = "Delete from ";
+            string sql = "Delete from HocSinh where where MAHS = any (Select MaHS from HS where TenLop = N'"+ cbKhoi.Text + cbLop.Text +"')";
             if (!database.DataChange(sql))
             {
                 MessageBox.Show("Cập nhật không thành công!");
