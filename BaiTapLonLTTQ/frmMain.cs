@@ -30,8 +30,7 @@ namespace BaiTapLonLTTQ
                 Profile.Enabled = false;
                 Healthy.Enabled = false;
                 mntDSGiaoVien.Enabled = false;
-                Healthy.Enabled = false;
-                menuStrip2.Enabled = false;
+                Print.Enabled = false;
             }
             else if(user.Chucvu == "Chủ Nhiệm")
             {

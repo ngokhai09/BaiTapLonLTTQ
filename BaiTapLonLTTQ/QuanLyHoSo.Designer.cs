@@ -30,17 +30,14 @@ namespace BaiTapLonLTTQ
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnTick = new System.Windows.Forms.Button();
             this.btnXuat = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
             this.btnExcel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgvHS = new System.Windows.Forms.DataGridView();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.cbLop = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cbKhoi = new System.Windows.Forms.ComboBox();
@@ -55,11 +52,10 @@ namespace BaiTapLonLTTQ
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnTick);
             this.panel4.Controls.Add(this.btnXuat);
-            this.panel4.Controls.Add(this.btnDel);
             this.panel4.Controls.Add(this.btnExcel);
             this.panel4.Controls.Add(this.btnUpdate);
-            this.panel4.Controls.Add(this.btnAdd);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.pictureBox4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -69,6 +65,20 @@ namespace BaiTapLonLTTQ
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1461, 38);
             this.panel4.TabIndex = 43;
+            // 
+            // btnTick
+            // 
+            this.btnTick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTick.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnTick.ForeColor = System.Drawing.Color.White;
+            this.btnTick.Location = new System.Drawing.Point(1248, 1);
+            this.btnTick.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTick.Name = "btnTick";
+            this.btnTick.Size = new System.Drawing.Size(100, 33);
+            this.btnTick.TabIndex = 6;
+            this.btnTick.Text = "Xóa";
+            this.btnTick.UseVisualStyleBackColor = false;
+            this.btnTick.Click += new System.EventHandler(this.btnTick_Click);
             // 
             // btnXuat
             // 
@@ -84,26 +94,13 @@ namespace BaiTapLonLTTQ
             this.btnXuat.UseVisualStyleBackColor = false;
             this.btnXuat.Click += new System.EventHandler(this.btnXuat_Click);
             // 
-            // btnDel
-            // 
-            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDel.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnDel.Enabled = false;
-            this.btnDel.ForeColor = System.Drawing.Color.White;
-            this.btnDel.Location = new System.Drawing.Point(1127, -1);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(221, 36);
-            this.btnDel.TabIndex = 4;
-            this.btnDel.Text = "Xóa học sinh";
-            this.btnDel.UseVisualStyleBackColor = false;
-            // 
             // btnExcel
             // 
             this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcel.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnExcel.Enabled = false;
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(949, -1);
+            this.btnExcel.Location = new System.Drawing.Point(1068, -2);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(4);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(179, 36);
@@ -118,26 +115,14 @@ namespace BaiTapLonLTTQ
             this.btnUpdate.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnUpdate.Enabled = false;
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(594, 0);
+            this.btnUpdate.Location = new System.Drawing.Point(885, -2);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(179, 36);
             this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "Cập Nhật";
             this.btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(771, 0);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(179, 36);
-            this.btnAdd.TabIndex = 3;
-            this.btnAdd.Text = "Thêm hồ sơ học sinh";
-            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label3
             // 
@@ -167,8 +152,6 @@ namespace BaiTapLonLTTQ
             this.panel6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.dgvHS);
-            this.panel6.Controls.Add(this.comboBox4);
-            this.panel6.Controls.Add(this.label7);
             this.panel6.Controls.Add(this.cbLop);
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.cbKhoi);
@@ -186,7 +169,7 @@ namespace BaiTapLonLTTQ
             this.dgvHS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvHS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvHS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvHS.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvHS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHS.Cursor = System.Windows.Forms.Cursors.Default;
@@ -197,26 +180,6 @@ namespace BaiTapLonLTTQ
             this.dgvHS.Size = new System.Drawing.Size(1459, 628);
             this.dgvHS.TabIndex = 33;
             this.dgvHS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHS_CellClick);
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(514, 20);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(259, 24);
-            this.comboBox4.TabIndex = 33;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(418, 22);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 17);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Trạng thái:";
             // 
             // cbLop
             // 
@@ -297,13 +260,10 @@ namespace BaiTapLonLTTQ
         private System.Windows.Forms.ComboBox cbKhoi;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbLop;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button btnXuat;
         private System.Windows.Forms.DataGridView dgvHS;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExcel;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnTick;
     }
 }

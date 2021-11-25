@@ -16,6 +16,7 @@ namespace BaiTapLonLTTQ
         User user;
         DatabaseProcess database = new DatabaseProcess();
         ExcelProcess excel = new ExcelProcess();
+        List<string> delString = new List<string>();
         public QuanLyHoSo(User user)
         {
             InitializeComponent();
@@ -65,29 +66,30 @@ namespace BaiTapLonLTTQ
             
 
 
-            sql = "select * from HS where TenLop " + check(cbKhoi.Text, cbLop.Text);
+            sql = "select MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe from HS where TenLop " + check(cbKhoi.Text, cbLop.Text);
             data = database.DataReader(sql);
             if(data.Rows.Count > 0)
             {
                 btnUpdate.Enabled = true;
+                btnXuat.Enabled = true;
             }
             else
             {
                 btnUpdate.Enabled = false;
+                btnXuat.Enabled = false;
             }
             dgvHS.DataSource = data;
-            dgvHS.Columns[0].HeaderText = "STT";
-            dgvHS.Columns[1].HeaderText = "Mã Học Sinh";
-            dgvHS.Columns[2].HeaderText = "Tên Học Sinh";
-            dgvHS.Columns[3].HeaderText = "Ngày Sinh";
-            dgvHS.Columns[4].HeaderText = "Giới tính";
-            dgvHS.Columns[5].HeaderText = "Địa chỉ";
-            dgvHS.Columns[6].HeaderText = "Họ Tên Bố";
-            dgvHS.Columns[7].HeaderText = "Nghề nghiệp bố";
-            dgvHS.Columns[8].HeaderText = "Số điện thoại bố";
-            dgvHS.Columns[9].HeaderText = "Họ tên mẹ";
-            dgvHS.Columns[10].HeaderText = "Nghề nghiệp mẹ";
-            dgvHS.Columns[11].HeaderText = "Số điện thoại mẹ";            
+            dgvHS.Columns[0].HeaderText = "Mã Học Sinh";
+            dgvHS.Columns[1].HeaderText = "Tên Học Sinh";
+            dgvHS.Columns[2].HeaderText = "Ngày Sinh";
+            dgvHS.Columns[3].HeaderText = "Giới tính";
+            dgvHS.Columns[4].HeaderText = "Địa chỉ";
+            dgvHS.Columns[5].HeaderText = "Họ tên cha";
+            dgvHS.Columns[6].HeaderText = "Nghề nghiệp cha";
+            dgvHS.Columns[7].HeaderText = "Số điện thoại cha";
+            dgvHS.Columns[8].HeaderText = "Họ tên mẹ";
+            dgvHS.Columns[9].HeaderText = "Nghề nghiệp mẹ";
+            dgvHS.Columns[10].HeaderText = "Số điện thoại mẹ";
 
 
         }
@@ -100,31 +102,58 @@ namespace BaiTapLonLTTQ
 
         private void cbLop_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnExcel.Enabled = true;
             QuanLyHoSo_Load(sender, e);
         }
 
         private void dgvHS_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvHS.CurrentRow.Cells[0].Value.ToString() != "")
-            {
-                btnDel.Enabled = true;
-            }
-            else
-            {
-                btnDel.Enabled = false;
-            }
+            
                      
         }
 
         private void btnExcel_Click(object sender, EventArgs e)
         {
-            dgvHS.DataSource =  excel.readExcel("Select STT, MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe from [Sheet1$]");
+            dgvHS.DataSource = excel.readExcel("Select MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, HoTenCha, NgheNghiepCha, SDTCha, HoTenMe, NgheNghiepMe, SDTMe from [Sheet1$]");
             //excel.writeExcel(dgvHS);
+            btnXuat.Enabled = true;
+            
         }
 
         private void btnXuat_Click(object sender, EventArgs e)
         {
-            excel.writeExcel(dgvHS);
+            List<String> a = new List<string>();
+            a.Add("Tên Lớp");
+            for(int i = 0; i < 11; i++)
+            {
+                a.Add(dgvHS.Columns[i].HeaderText);
+            }
+            excel.writeExcel(dgvHS, cbKhoi.Text + cbLop.Text, "HỌC SINH", a);
+        }
+
+        private void btnTick_Click(object sender, EventArgs e)
+        {
+            DialogResult rs = MessageBox.Show("Bạn chắc chắn muốn xóa? Lưu ý các bước xóa không thể hoàn tác", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(rs == DialogResult.Yes)
+            {
+                dgvHS.Rows.Remove(dgvHS.CurrentRow);
+            }            
+        }
+
+        private void btnUnTick_Click(object sender, EventArgs e)
+        {
+            delString.Remove(dgvHS.CurrentRow.Cells[0].Value.ToString());
+            dgvHS.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string sql = "Delete from ";
+            if (!database.DataChange(sql))
+            {
+                MessageBox.Show("Cập nhật không thành công!");
+                return;
+            }
         }
     }
 }
