@@ -145,29 +145,19 @@ namespace BaiTapLonLTTQ
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string sql = "select MaLop from Lop where TenLop = N'" + cbKhoi.Text + cbLop.Text + "'";
-            string ml = database.DataReader(sql).Rows[0]["MaLop"].ToString();
-            sql = "Delete from HocSinh where MaLop = N'" + ml + "'";
-            if (!database.DataChange(sql))
-            {
-                MessageBox.Show("Cập nhật không thành công!");
-                return;
-            }
-
             for (int j = 0; j < dgvHealth.Rows.Count - 1; j++)
             {
 
 
-                sql = "Insert into HocSinh () values(";
+                string sql = "Insert into SoSucKhoe values(";
                 for (int i = 0; i < dgvHealth.Columns.Count; i++)
                 {
-                    if (dgvHealth.Columns[i].HeaderText == "Ngày Sinh")
-                    {
-                        sql += "'" + Chuyen(dgvHealth.Rows[j].Cells[i].Value.ToString()) + "', ";
-                    }
-                    else sql += "N'" + dgvHealth.Rows[j].Cells[i].Value.ToString() + "', ";
+                    if (i == 1) continue;
+                    if(i != dgvHealth.Columns.Count - 1)
+                        sql += "N'" + dgvHealth.Rows[j].Cells[i].Value.ToString() + "', ";
+                    else sql += "N'" + dgvHealth.Rows[j].Cells[i].Value.ToString() + "')";
+
                 }
-                sql += " N'" + ml + "')";
                 if (!database.DataChange(sql))
                 {
                     MessageBox.Show("Cập nhật không thành công");
