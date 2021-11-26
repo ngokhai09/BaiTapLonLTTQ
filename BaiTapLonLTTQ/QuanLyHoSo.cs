@@ -17,7 +17,6 @@ namespace BaiTapLonLTTQ
         User user;
         DatabaseProcess database = new DatabaseProcess();
         ExcelProcess excel = new ExcelProcess();
-        List<string> delString = new List<string>();
         public QuanLyHoSo(User user)
         {
             InitializeComponent();
@@ -140,12 +139,6 @@ namespace BaiTapLonLTTQ
             {
                 dgvHS.Rows.Remove(dgvHS.CurrentRow);
             }            
-        }
-
-        private void btnUnTick_Click(object sender, EventArgs e)
-        {
-            delString.Remove(dgvHS.CurrentRow.Cells[0].Value.ToString());
-            dgvHS.CurrentRow.DefaultCellStyle.BackColor = Color.White;
         }
         private string Chuyen(string s)
         {

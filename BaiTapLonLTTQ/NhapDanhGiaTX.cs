@@ -12,6 +12,8 @@ namespace BaiTapLonLTTQ
 {
     public partial class NhapDanhGiaTX : Form
     {
+        DatabaseProcess database = new DatabaseProcess();
+        ExcelProcess excel = new ExcelProcess();
         User user;
         public NhapDanhGiaTX(User user)
         {
@@ -21,11 +23,12 @@ namespace BaiTapLonLTTQ
 
         private void NhapDanhGiaTX_Load(object sender, EventArgs e)
         {
-            /*if (user.Username == "")
+            if (user.Username == "")
             {
                 Visible = false;
-                Application.Run(new Login());
-            }*/
+                Login login = new Login();
+                login.Show();
+            }
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -37,7 +40,7 @@ namespace BaiTapLonLTTQ
         {
 
         }
-        /*private string check(string a, string b, string c)
+        private string check(string a, string b, string c)
         {
             if (c == "")
                 return " = ''";
@@ -82,13 +85,13 @@ namespace BaiTapLonLTTQ
 
             sql = "select MaHS, TenHS, TenLop, TenMon, MucDoDanhGia, NoiDungDanhGia from DG where TenLop " + check(cbKhoi.Text, cbLop.Text, cbMon.Text);
             data = database.DataReader(sql);
-            dgvDK.DataSource = data;
-            dgvDK.Columns[0].HeaderText = "Mã Học Sinh";
-            dgvDK.Columns[1].HeaderText = "Tên Học Sinh";
-            dgvDK.Columns[2].HeaderText = "Tên Lớp";
-            dgvDK.Columns[3].HeaderText = "Tên Môn";
-            dgvDK.Columns[4].HeaderText = "Mức độ hoàn thành";
-            dgvDK.Columns[5].HeaderText = "Nội dung";
+            dgvTX.DataSource = data;
+            dgvTX.Columns[0].HeaderText = "Mã Học Sinh";
+            dgvTX.Columns[1].HeaderText = "Tên Học Sinh";
+            dgvTX.Columns[2].HeaderText = "Tên Lớp";
+            dgvTX.Columns[3].HeaderText = "Tên Môn";
+            dgvTX.Columns[4].HeaderText = "Mức độ hoàn thành";
+            dgvTX.Columns[5].HeaderText = "Nội dung";
             if (data.Rows.Count > 0) btnUpdate.Enabled = true;
             else btnUpdate.Enabled = false;
 
@@ -96,7 +99,7 @@ namespace BaiTapLonLTTQ
 
         private void dgvDK_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvDK.CurrentRow.Cells[0].Value.ToString() != "")
+            if (dgvTX.CurrentRow.Cells[0].Value.ToString() != "")
             {
                 btnUpdate.Enabled = true;
             }
@@ -109,17 +112,25 @@ namespace BaiTapLonLTTQ
         private void cbKhoi_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbLop.Enabled = true;
-            NhapDanhGiaDK_Load(sender, e);
+            NhapDanhGiaTX_Load(sender, e);
         }
 
         private void cbLop_SelectedIndexChanged(object sender, EventArgs e)
         {
-            NhapDanhGiaDK_Load(sender, e);
+            NhapDanhGiaTX_Load(sender, e);
         }
 
         private void cbMon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            NhapDanhGiaDK_Load(sender, e);
-        }*/
+            NhapDanhGiaTX_Load(sender, e);
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            dgvTX.DataSource = excel.readExcel("select MaHS, HoTen, TenMon, NhanXetNangLuc, NhanXetPhamChat from[Sheet4$]");
+            //excel.writeExcel(dgvHS);
+            btnXuat.Enabled = true;
+            btnUpdate.Enabled = true;
+        }
     }
 }

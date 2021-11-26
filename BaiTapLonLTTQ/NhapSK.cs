@@ -14,6 +14,7 @@ namespace BaiTapLonLTTQ
     {
         User user;
         DatabaseProcess database = new DatabaseProcess();
+        ExcelProcess excel = new ExcelProcess();
         public NhapSK(User user)
         {
             InitializeComponent();
@@ -59,7 +60,7 @@ namespace BaiTapLonLTTQ
                     if (!cbLop.Items.Contains(b)) cbLop.Items.Add(b);
                 }
             }
-            sql = "select * from SK where TenLop " + check(cbKhoi.Text, cbLop.Text);
+            sql = "select MaHS, HoTen, ChieuCao, CanNang, ChiSoIBM, XepLoaiSucKhoe from SK where TenLop " + check(cbKhoi.Text, cbLop.Text);
             data = database.DataReader(sql);
             if (data.Rows.Count > 0)
             {
@@ -87,6 +88,93 @@ namespace BaiTapLonLTTQ
         private void cbLop_SelectedIndexChanged(object sender, EventArgs e)
         {
             NhapSK_Load(sender, e);
+        }
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            dgvHealth.DataSource = excel.readExcel("select MaHS, HoTen, ChieuCao, CanNang, ChiSoBMI, XepLoaiSucKhoe from[Sheet3$]");
+            //excel.writeExcel(dgvHS);
+            btnXuat.Enabled = true;
+            btnUpdate.Enabled = true;
+
+        }
+
+        private void btnXuat_Click(object sender, EventArgs e)
+        {
+            List<String> a = new List<string>();
+            a.Add("Tên Lớp");
+            for (int i = 0; i < 6; i++)
+            {
+                a.Add(dgvHealth.Columns[i].HeaderText);
+            }
+            excel.writeExcel(dgvHealth, cbKhoi.Text + cbLop.Text, "SỨC KHỎE", a);
+        }
+
+        private void btnTick_Click(object sender, EventArgs e)
+        {
+            DialogResult rs = MessageBox.Show("Bạn chắc chắn muốn xóa? Lưu ý các bước xóa không thể hoàn tác", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (rs == DialogResult.Yes)
+            {
+                dgvHealth.Rows.Remove(dgvHealth.CurrentRow);
+            }
+        }
+        private string Chuyen(string s)
+        {
+            string res = "", dd = "";
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                if (s[i] != '/')
+                {
+                    dd += s[i];
+                }
+                else
+                {
+                    for (int j = dd.Length - 1; j >= 0; j--)
+                    {
+                        res += dd[j];
+                    }
+                    dd = "";
+                    res += '-';
+                }
+            }
+            for (int j = dd.Length - 1; j >= 0; j--)
+            {
+                res += dd[j];
+            }
+            return res;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string sql = "select MaLop from Lop where TenLop = N'" + cbKhoi.Text + cbLop.Text + "'";
+            string ml = database.DataReader(sql).Rows[0]["MaLop"].ToString();
+            sql = "Delete from HocSinh where MaLop = N'" + ml + "'";
+            if (!database.DataChange(sql))
+            {
+                MessageBox.Show("Cập nhật không thành công!");
+                return;
+            }
+
+            for (int j = 0; j < dgvHealth.Rows.Count - 1; j++)
+            {
+
+
+                sql = "Insert into HocSinh () values(";
+                for (int i = 0; i < dgvHealth.Columns.Count; i++)
+                {
+                    if (dgvHealth.Columns[i].HeaderText == "Ngày Sinh")
+                    {
+                        sql += "'" + Chuyen(dgvHealth.Rows[j].Cells[i].Value.ToString()) + "', ";
+                    }
+                    else sql += "N'" + dgvHealth.Rows[j].Cells[i].Value.ToString() + "', ";
+                }
+                sql += " N'" + ml + "')";
+                if (!database.DataChange(sql))
+                {
+                    MessageBox.Show("Cập nhật không thành công");
+                    return;
+                }
+            }
+            MessageBox.Show("Cập nhật thành công!");
         }
     }
 }

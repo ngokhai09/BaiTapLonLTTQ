@@ -30,12 +30,10 @@ namespace BaiTapLonLTTQ
                 Profile.Enabled = false;
                 Healthy.Enabled = false;
                 mntDSGiaoVien.Enabled = false;
-                Print.Enabled = false;
             }
             else if(user.Chucvu == "Chủ Nhiệm")
             {
                 mntDSGiaoVien.Enabled = false;
-                mntGiaoVien.Enabled = false;
             }
             for(int i = 0; i < n; i++)
             {

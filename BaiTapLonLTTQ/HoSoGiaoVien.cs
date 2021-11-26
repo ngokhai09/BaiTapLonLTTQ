@@ -62,44 +62,85 @@ namespace BaiTapLonLTTQ
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            delString.Add(dgvList.CurrentRow.Cells[0].Value.ToString());
-            dgvList.CurrentRow.DefaultCellStyle.BackColor = Color.Red;            
+            DialogResult rs = MessageBox.Show("Bạn chắc chắn muốn xóa? Lưu ý các bước xóa không thể hoàn tác", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (rs == DialogResult.Yes)
+            {
+                dgvList.Rows.Remove(dgvList.CurrentRow);
+            }
         }
-
-        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private bool check()
         {
-            if (dgvList.CurrentRow.Cells[0].Value.ToString() != "")
+            bool ok = true;
+            for(int i = 0; i < dgvList.Rows.Count - 1; i++)
             {
-                btnUnTick.Enabled = true;
+                if (dgvList.Rows[i].Cells[0].Value.ToString() == "")
+                {
+                    dgvList.Rows[i].Cells[0].Style.BackColor = Color.OrangeRed;
+                    ok = false;
+                }
+                if (dgvList.Rows[i].Cells[1].Value.ToString() == "")
+                {
+                    dgvList.Rows[i].Cells[1].Style.BackColor = Color.OrangeRed;
+                    ok = false;
+                }
+                if (dgvList.Rows[i].Cells[6].Value.ToString() == "")
+                {
+                    dgvList.Rows[i].Cells[6].Style.BackColor = Color.OrangeRed;
+                    ok = false;
+                }
             }
-            else
-            {
-                btnUnTick.Enabled = false;
-            }
+            return ok;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool Del = true, Update = true;
-            foreach(string item  in delString)
+            if (!check())
             {
-                string sql = "Delete from GiaoVien where MaGV = N'" + item + "'";
-                if (database.DataChange(sql))
+                MessageBox.Show("Không được để trống ô màu đỏ!", "Thông Báo", MessageBoxButtons.OK);
+                return;
+            }
+            string sql = "Delete from GiaoVien ";
+            if (!database.DataChange(sql))
+            {
+                MessageBox.Show("Cập nhật không thành công!");
+                return;
+            }
+            sql = "Delete from TaiKhoan ";
+            if (!database.DataChange(sql))
+            {
+                MessageBox.Show("Cập nhật không thành công!");
+                return;
+            }
+
+            for (int j = 0; j < dgvList.Rows.Count - 1; j++)
+            {
+                sql = "Insert into GiaoVien values(";
+                for (int i = 0; i < 5; i++)
                 {
-                    delString.Remove(item);
+                    if (dgvList.Columns[i].HeaderText == "Môn Học" && dgvList.Rows[j].Cells[i].Value.ToString() != "")
+                    {
+                        sql += "N'" + database.DataReader("Select MaMon from MonHoc where TenMon = N'" + dgvList.Rows[j].Cells[i].Value + "'").Rows[0]["MaMon"].ToString() + "', ";
+                    }                        
+                    else sql += "N'" + dgvList.Rows[j].Cells[i].Value.ToString() + "', ";
+                }
+                if (dgvList.Rows[j].Cells[5].Value.ToString() != "")
+                    sql += "N'" + database.DataReader("Select MaLop from Lop where TenLop = N'" + dgvList.Rows[j].Cells[5].Value + "'").Rows[0]["MaLop"].ToString() + "', ";
+                else sql += "N'',";
+                sql += "N'" + database.DataReader("Select MaCV from ChucVu where TenCV = N'" + dgvList.Rows[j].Cells[6].Value + "'").Rows[0]["MaCV"].ToString() + "')";
+                if (!database.DataChange(sql))
+                {
+                    MessageBox.Show("Cập nhật không thành công");
+                    return;
+                }                
+                sql = "Insert into TaiKhoan values(N'" + dgvList.Rows[j].Cells[7].Value.ToString() + "', N'" + dgvList.Rows[j].Cells[8].Value.ToString() + "', N'" + dgvList.Rows[j].Cells[0].Value.ToString() + "')";
+                if (!database.DataChange(sql))
+                {
+                    MessageBox.Show("Cập nhật không thành công");
+                    return;
                 }
             }
-            string str = "";
-            foreach(string item in delString)
-            {
-                str += item + "\n";
-            }
-            if(str != "")
-            {
-                MessageBox.Show("Xóa không thành công các giáo viên có mã:\n" + str, "Thông Báo", MessageBoxButtons.OK);
-                Del = false;
-            }
-            
+            MessageBox.Show("Cập nhật thành công!");
+
 
         }
 
@@ -107,6 +148,18 @@ namespace BaiTapLonLTTQ
         {
             delString.Remove(dgvList.CurrentRow.Cells[0].Value.ToString());
             dgvList.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+        }
+
+        private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(dgvList.CurrentRow.Cells[0].Value.ToString() != "")
+            {
+                btnTick.Enabled = true;
+            }
+            else
+            {
+                btnTick.Enabled = false;
+            }
         }
     }
 }

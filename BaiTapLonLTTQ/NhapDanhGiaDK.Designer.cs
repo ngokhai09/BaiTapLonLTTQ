@@ -31,12 +31,13 @@ namespace BaiTapLonLTTQ
         {
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.btnXuat = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvDK = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,20 +45,21 @@ namespace BaiTapLonLTTQ
             this.cbKhoi = new System.Windows.Forms.ComboBox();
             this.cbMon = new System.Windows.Forms.ComboBox();
             this.cbLop = new System.Windows.Forms.ComboBox();
-            this.dgvDK = new System.Windows.Forms.DataGridView();
+            this.btnTick = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDK)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnTick);
             this.panel4.Controls.Add(this.pictureBox7);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button6);
+            this.panel4.Controls.Add(this.btnExcel);
+            this.panel4.Controls.Add(this.btnXuat);
             this.panel4.Controls.Add(this.btnUpdate);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -78,50 +80,56 @@ namespace BaiTapLonLTTQ
             this.pictureBox7.TabIndex = 38;
             this.pictureBox7.TabStop = false;
             // 
-            // button8
+            // btnExcel
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(1117, -1);
-            this.button8.Margin = new System.Windows.Forms.Padding(4);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(221, 36);
-            this.button8.TabIndex = 37;
-            this.button8.Text = "Nhập đánh giá Excel";
-            this.button8.UseVisualStyleBackColor = false;
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcel.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnExcel.Enabled = false;
+            this.btnExcel.FlatAppearance.BorderSize = 0;
+            this.btnExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.ForeColor = System.Drawing.Color.White;
+            this.btnExcel.Location = new System.Drawing.Point(1023, -1);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(221, 36);
+            this.btnExcel.TabIndex = 37;
+            this.btnExcel.Text = "Nhập đánh giá Excel";
+            this.btnExcel.UseVisualStyleBackColor = false;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
-            // button6
+            // btnXuat
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(1339, -1);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 36);
-            this.button6.TabIndex = 36;
-            this.button6.Text = "Xuất excel";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnXuat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXuat.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnXuat.Enabled = false;
+            this.btnXuat.FlatAppearance.BorderSize = 0;
+            this.btnXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuat.ForeColor = System.Drawing.Color.White;
+            this.btnXuat.Location = new System.Drawing.Point(1339, -1);
+            this.btnXuat.Margin = new System.Windows.Forms.Padding(4);
+            this.btnXuat.Name = "btnXuat";
+            this.btnXuat.Size = new System.Drawing.Size(100, 36);
+            this.btnXuat.TabIndex = 36;
+            this.btnXuat.Text = "Xuất excel";
+            this.btnXuat.UseVisualStyleBackColor = false;
+            this.btnXuat.Click += new System.EventHandler(this.btnXuat_Click);
             // 
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnUpdate.Enabled = false;
             this.btnUpdate.FlatAppearance.BorderSize = 0;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(1018, -1);
+            this.btnUpdate.Location = new System.Drawing.Point(924, -1);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 36);
             this.btnUpdate.TabIndex = 35;
             this.btnUpdate.Text = "Cập nhật";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label1
             // 
@@ -144,6 +152,18 @@ namespace BaiTapLonLTTQ
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1445, 600);
             this.panel1.TabIndex = 2;
+            // 
+            // dgvDK
+            // 
+            this.dgvDK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDK.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDK.Location = new System.Drawing.Point(0, 54);
+            this.dgvDK.Name = "dgvDK";
+            this.dgvDK.RowHeadersWidth = 51;
+            this.dgvDK.RowTemplate.Height = 24;
+            this.dgvDK.Size = new System.Drawing.Size(1445, 546);
+            this.dgvDK.TabIndex = 50;
+            this.dgvDK.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDK_CellClick);
             // 
             // panel2
             // 
@@ -223,17 +243,20 @@ namespace BaiTapLonLTTQ
             this.cbLop.TabIndex = 43;
             this.cbLop.SelectedIndexChanged += new System.EventHandler(this.cbLop_SelectedIndexChanged);
             // 
-            // dgvDK
+            // btnTick
             // 
-            this.dgvDK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDK.Location = new System.Drawing.Point(0, 54);
-            this.dgvDK.Name = "dgvDK";
-            this.dgvDK.RowHeadersWidth = 51;
-            this.dgvDK.RowTemplate.Height = 24;
-            this.dgvDK.Size = new System.Drawing.Size(1445, 546);
-            this.dgvDK.TabIndex = 50;
-            this.dgvDK.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDK_CellClick);
+            this.btnTick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTick.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnTick.Enabled = false;
+            this.btnTick.ForeColor = System.Drawing.Color.White;
+            this.btnTick.Location = new System.Drawing.Point(1242, 1);
+            this.btnTick.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTick.Name = "btnTick";
+            this.btnTick.Size = new System.Drawing.Size(100, 33);
+            this.btnTick.TabIndex = 39;
+            this.btnTick.Text = "Xóa";
+            this.btnTick.UseVisualStyleBackColor = false;
+            this.btnTick.Click += new System.EventHandler(this.btnTick_Click);
             // 
             // NhapDanhGiaDK
             // 
@@ -253,9 +276,9 @@ namespace BaiTapLonLTTQ
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDK)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDK)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -263,8 +286,8 @@ namespace BaiTapLonLTTQ
         #endregion
 
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.Button btnXuat;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label label1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
@@ -278,5 +301,6 @@ namespace BaiTapLonLTTQ
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvDK;
+        private System.Windows.Forms.Button btnTick;
     }
 }
